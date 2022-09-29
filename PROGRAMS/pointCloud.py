@@ -49,15 +49,10 @@ def extractFromFile(fpath):
         singularFrame = []
         #print(frame)
         for index in range(len(indexes)-1):
-            print("CYCLE")
-            #startPoint = indexes[-1]*frame + indexes[index]
-            print("Starting Point " + str(frame*indexes[-1]) +"\t Frame "+str(frame))
-
-            print(frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:])
+            print(frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:].T)
             singularFrame.append(PointCloud(
-                frameData.values[indexes[index] + frameInfo[-1]*frame:indexes[index+1]+indexes[-1]*frame, :]))
+                frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:].T))
         frameClouds.append(singularFrame)
-    #print(frameClouds[0][0].data)
     #print(len(frame_clouds))
     return frameClouds
 
