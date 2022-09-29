@@ -7,30 +7,42 @@ import csv as csv
 
 class PointCloud:
 
-    def __init__(self,data=None):
-        data = data
+    def __init__(self, data=None):
+        self.data = data
+
 
 def extractFromFile(fpath):
     # Get Header
-    header = pd.read_csv(fpath,header=None,nrows =1)
-    # Get File Name    
+    header = pd.read_csv(fpath, header=None, nrows=1)
+    # Get File Name
     name = header.values[0][-1].split("-")[-1].split(".")[0]
-    frameInfo = header.values[0,0:-1]
+    #print(header.values)
+    frameInfo = header.values[0, 0:3]
+    #print(frameInfo)
     # Dictionary of Frames
-    nframes = {'calbody':1,'calReadings':frameInfo[-1],'empivot':frameInfo[-1],'optpivot':frameInfo[-1],'output':frameInfo[-1]}
+    nframes = {'calbody': 1, 'calreadings': frameInfo[-2],
+               'empivot': frameInfo[-1], 'optpivot': frameInfo[-1], 'output': frameInfo[-1]}
     # Acquire Data
-    frameData = pd.read_csv(fpath,header=None,names=["x","y","z"],skiprows=1)
-    
+    frameData = pd.read_csv(fpath, header=None, names=[
+                            "x", "y", "z"], skiprows=1)
+    #print(frameData)
+    #print(frameInfo)
     # Index Ranges
-    startPoints = getIncrementIndex(frameInfo)
-    
-    #Parsing Data
+    indexes = getIncrementIndex(frameInfo)
+    #print(indexes)
+    # Parsing Data
     frame_clouds = []
-    startingPoint = 0
-    for itteration in nframes[name]:
-        
-    
-    
+    #print(indexes)
+    for frame in range(nframes[name]):
+        for index in range(len(indexes)-1):
+            # print(indexes[index])
+            frame_clouds.append(PointCloud(
+                frameData.values[indexes[-1]*frame + indexes[index] + frameInfo[-1]*frame:indexes[index+1], :].T))
+       # print(len(frame_clouds))
+
+    #print(len(frame_clouds))
+    return frame_clouds
+
 def getIncrementIndex(frameInfo):
     startPoints = []
     start = 0
