@@ -8,7 +8,7 @@ from numpy import empty
 def main():
 
     # Placeholders for files
-    calbody = None
+    calBody = None
     calReadings = None
     empivot = None
     optpivot = None
@@ -17,7 +17,7 @@ def main():
     if (len(sys.argv) == 5):
         # Assign
         calBody = sys.argv[1]
-        calreadings = sys.argv[2]
+        calReadings = sys.argv[2]
         empivot = sys.argv[3]
         optpivot = sys.argv[4]
     else:

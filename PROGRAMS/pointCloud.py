@@ -10,6 +10,17 @@ class PointCloud:
     def __init__(self, data=None):
         self.data = data
 
+    def registration(self,b):
+        """
+            Self in analgous to a
+        """
+        print(type(self.data))
+        print(type(b))
+
+        aMean = np.mean(self.data, axis =1)
+        bMean = np.mean(b, axis =1)
+        print(aMean)
+        print(bMean)
 
 def extractFromFile(fpath):
     # Get Header
@@ -29,19 +40,26 @@ def extractFromFile(fpath):
     #print(frameInfo)
     # Index Ranges
     indexes = getIncrementIndex(frameInfo)
-    #print(indexes)
+    print(indexes)
     # Parsing Data
-    frame_clouds = []
+    frameClouds = []
     #print(indexes)
+    print(frameData.values)
     for frame in range(nframes[name]):
+        singularFrame = []
+        #print(frame)
         for index in range(len(indexes)-1):
-            # print(indexes[index])
-            frame_clouds.append(PointCloud(
-                frameData.values[indexes[-1]*frame + indexes[index] + frameInfo[-1]*frame:indexes[index+1], :].T))
-       # print(len(frame_clouds))
+            print("CYCLE")
+            #startPoint = indexes[-1]*frame + indexes[index]
+            print("Starting Point " + str(frame*indexes[-1]) +"\t Frame "+str(frame))
 
+            print(frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:])
+            singularFrame.append(PointCloud(
+                frameData.values[indexes[index] + frameInfo[-1]*frame:indexes[index+1]+indexes[-1]*frame, :]))
+        frameClouds.append(singularFrame)
+    #print(frameClouds[0][0].data)
     #print(len(frame_clouds))
-    return frame_clouds
+    return frameClouds
 
 def getIncrementIndex(frameInfo):
     startPoints = []
