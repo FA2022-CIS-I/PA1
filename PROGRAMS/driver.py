@@ -1,6 +1,7 @@
 
+from distutils.log import error
 import sys
-
+import q4 as q4
 from numpy import empty
 
 
@@ -13,19 +14,19 @@ def main():
     optpivot = None
 
     # Check if appropriate amount of args
-    if (len(sys.argv) == 4):
+    if (len(sys.argv) == 5):
         # Assign
         calBody = sys.argv[1]
         calreadings = sys.argv[2]
         empivot = sys.argv[3]
         optpivot = sys.argv[4]
     else:
-        print("Insufficent Arguments")
+        error("Insufficient Arguments")
+    problems(calBody,calReadings,empivot,optpivot)
 
 def problems(calBody,calReadings,empivot,optpivot):
-    a
-    #TODO
-
+    q4.transformation(calBody,calReadings)
+    
 
 
 if __name__ == "__main__":
