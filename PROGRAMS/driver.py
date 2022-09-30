@@ -22,11 +22,13 @@ def main():
         optpivot = sys.argv[4]
     else:
         error("Insufficient Arguments")
-    problems(calBody,calReadings,empivot,optpivot)
+    problems(outputName,calBody,calReadings,empivot,optpivot)
 
-def problems(calBody,calReadings,empivot,optpivot):
-    q4.transformation(calBody,calReadings)
+def problems(outputName,calBody,calReadings,empivot,optpivot):
+    c_expected = q4.transformation(calBody,calReadings)
     
+
+    fileOut = open(outputName)
 
 
 if __name__ == "__main__":
