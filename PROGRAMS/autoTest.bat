@@ -1,0 +1,1 @@
+python comparison.py pa1-debug-a-output1.txt pa1-debug-a-output1-control.txt
