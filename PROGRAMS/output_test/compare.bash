@@ -1,0 +1,1 @@
+diff pa1-debug-a-output1-control.txt pa1-debug-a-output1.txt > compareResults.txt
