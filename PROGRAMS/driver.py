@@ -1,4 +1,5 @@
 
+from ctypes import pointer
 from distutils.log import error
 import sys
 import q4 as q4
@@ -22,14 +23,18 @@ def main():
         optpivot = sys.argv[4]
     else:
         error("Insufficient Arguments")
+    
+    outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
     problems(outputName,calBody,calReadings,empivot,optpivot)
 
 def problems(outputName,calBody,calReadings,empivot,optpivot):
     c_expected = q4.transformation(calBody,calReadings)
     
 
-    fileOut = open(outputName)
-
+    fileOut = open(outputName,"w")
+    fileOut.write('{0}, {1}, {2}\n'.format(len(c_expected[0].points[0]),len(c_expected),outputName))
+    for frame in c_expected:
+        print(frame.points)
 
 if __name__ == "__main__":
     main()

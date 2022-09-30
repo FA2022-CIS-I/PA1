@@ -12,4 +12,4 @@ def transformation(calbodyFile,calreadingsFile):
         F_A = objectFrames[0][1].registration(frame[1].points)
         c_i = objectFrames[0][2].transform(F_D.inv().composition(F_A))  
         transformations.append(c_i)
-    return transformation
+    return transformations
