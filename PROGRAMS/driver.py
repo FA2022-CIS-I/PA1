@@ -1,6 +1,5 @@
 
-from ctypes import pointer
-from distutils.log import error
+
 import sys
 import q4 as q4
 from numpy import empty
@@ -14,7 +13,6 @@ def main():
     empivot = None
     optpivot = None
 
-    print(:hello!)
 
     # Check if appropriate amount of args
     if (len(sys.argv) == 5):
@@ -24,7 +22,7 @@ def main():
         empivot = sys.argv[3]
         optpivot = sys.argv[4]
     else:
-        error("Insufficient Arguments")
+        raise("Insufficient Arguments")
     
     outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
     problems(outputName,calBody,calReadings,empivot,optpivot)
