@@ -14,6 +14,7 @@ def main():
     empivot = None
     optpivot = None
 
+    #hello
     # Check if appropriate amount of args
     if (len(sys.argv) == 5):
         # Assign
