@@ -12,6 +12,7 @@ def main():
     file2 = open(fileTwo,'r')
     linesOne = file1.readlines()
     linestwo = file2.readlines()
+    errorCount = 0
     #check if same length 
     if len(linesOne) != len(linestwo):
         error("Not the same Length")
@@ -21,9 +22,9 @@ def main():
             firstArray = linesOne[i].replace(" ", "").split(",")
             secondArray = linestwo[i].replace(" ", "").split(",")
             if(firstArray != secondArray):
-                print("Not a Match at Line: " + str(i+1))
-                print("First File "+str(firstArray))
-                print("Seoncd File "+str(secondArray))
+                print("Mismatch at Line: " + str(i+1) + "\t" + "1 File "+str(firstArray) + "\t2 File "+str(secondArray))
+                errorCount = errorCount + 1
+    print("Total Errors " + str(errorCount))
 
 
 

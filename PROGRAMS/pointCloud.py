@@ -21,7 +21,7 @@ class PointCloud:
         U = U.T
         V_t = V.T
         
-        R = V_t.dot(U)
+        R = V_t.dot((U))
         p = bMean - R.dot(aMean)
         return Frame.Frame(R,p)
     
@@ -35,8 +35,6 @@ def extractFromFile(fpath):
     # Get File Name
     name = header.values[0][-1].split("-")[-1].split(".")[0]
     frameInfo = header.values[0]
-    #print(name)
-    #print(frameInfo)
     # Dictionary of Frames
     fileFrames = {'calbody': 1, 'calreadings': frameInfo[-2],
                'empivot': frameInfo[-2], 'optpivot': frameInfo[-2], 'output': frameInfo[-2]}
@@ -45,28 +43,17 @@ def extractFromFile(fpath):
     # Acquire Data
     frameData = pd.read_csv(fpath, header=None, names=[
                             "x", "y", "z"], skiprows=1)
-    #print(frameData)
-    # Index Ranges
     indexes = getIncrementIndex(frameReadings[name])
-    #print(indexes)
-    # Parsing Data
     frameClouds = []
-    #print(fileFrames)
     for frame in range(fileFrames[name]):
         singularFrame = []
-        #print(frame)
-        #print("indexes " + str(indexes))
-
         for index in range(len(indexes)-1):
-           # print(frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:].T)
             singularFrame.append(PointCloud(
                 frameData.values[(frame*indexes[-1]+indexes[index]):(frame*indexes[-1])+indexes[index+1],:].T))
         frameClouds.append(singularFrame)
-    #print(len(frameClouds))
     return frameClouds
 
 def getIncrementIndex(frameInfo):
-    #print("Frame Info " + str(type(frameInfo)))
     startPoints = []
     start = 0
     startPoints.append(0)
