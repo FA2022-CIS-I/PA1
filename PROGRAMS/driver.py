@@ -2,7 +2,8 @@
 
 import sys
 import q4 as q4
-from numpy import empty
+import q5 as q5
+import numpy as np
 
 
 def main():
@@ -28,12 +29,12 @@ def main():
     problems(outputName,calBody,calReadings,empivot,optpivot)
 
 def problems(outputName,calBody,calReadings,empivot,optpivot):
-    c_expected = q4.transformation(calBody,calReadings)
-    
+    cExepcted = q4.transformation(calBody,calReadings)
+    pDimple = q5.getPosition(empivot,optpivot)
 
     fileOut = open(outputName,"w")
-    fileOut.write('{0} , {1} , {2}\n'.format(len(c_expected[0].points[0]),len(c_expected),outputName))
-    for frame in c_expected:
+    fileOut.write('{0} , {1} , {2}\n'.format(len(cExepcted[0].points[0]),len(cExepcted),outputName))
+    for frame in cExepcted:
         for row in (frame.points.T):
             fileOut.write('{0} ,{1} ,{2}\n'.format(format(row[0],".2f"),format(row[1],".2f"),format(row[2],".2f")))
     fileOut.close()

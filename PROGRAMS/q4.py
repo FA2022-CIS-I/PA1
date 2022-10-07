@@ -2,7 +2,6 @@ import pointCloud as PointCloud
 
 def transformation(calbodyFile,calreadingsFile):
 
-    PointCloud
     objectFrames = PointCloud.extractFromFile(calbodyFile)
     trackerFrames = PointCloud.extractFromFile(calreadingsFile)
     #print(type(body_frames[0]))
