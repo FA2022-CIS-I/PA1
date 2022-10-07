@@ -19,17 +19,20 @@ def getPosition(calibrationData):
             R_j[k*3][i]= R[0][i]
             R_j[k*3+1][i]= R[1][i]
             R_j[k*3+2][i]= R[2][i]
-            p_squares = -1*p[i]
+            p_squares[k*3+i] = -1*p[i]
         
     for n in range(numberOfFrames):
         R_j[n*3][3]=-1
         R_j[n*3+1][4]=-1
         R_j[n*3+2][5]=-1
-    print((R_j))
-    print(p_squares)
     
-    result = np.linalg.lstsq(R_j,p_squares)
-    print(result)
+    result = np.linalg.lstsq(R_j,p_squares,rcond=None)
+
+    pivCal = np.array(result[0][0:3])
+    pivPiv = np.array(result[0][3:6])
+
+    return pivPiv,pivCal
+
 
 
     
