@@ -1,13 +1,20 @@
 import numpy as np
 
-def getPosition(calibrationData):
+def getCalibration(calibrationData):
+    """
+        gets the calibration positional information from the data 
+        @param calibrationData, the set of data in which to predict the location of the position 
+        returns a set of coordinates representing the position relative to the location of the position
+    """
     numberOfFrames = len(calibrationData)
     
+    #Defining a local probe coordinate system to compute g_j
     G_first = calibrationData[0][0].points
 
     g_0 = np.mean(G_first,axis = 1,keepdims=True)
     g_j = G_first - g_0
 
+    #Variables and setup for least squares problems
     R_j = np.zeros([numberOfFrames*3,6])
     p_squares = np.zeros([numberOfFrames*3])
 
@@ -26,8 +33,10 @@ def getPosition(calibrationData):
         R_j[n*3+1][4]=-1
         R_j[n*3+2][5]=-1
     
+    #execute least squares problem
     result = np.linalg.lstsq(R_j,p_squares,rcond=None)
 
+    #return information regarding the position relative to the EM tracker base
     pivCal = np.array(result[0][0:3])
     pivPiv = np.array(result[0][3:6])
 

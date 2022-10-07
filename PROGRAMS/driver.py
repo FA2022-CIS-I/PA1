@@ -7,6 +7,9 @@ import q6 as q6
 
 
 def main():
+    """
+        Main, primary driver, returns nothing
+    """
 
     # Placeholders for files
     calBody = None
@@ -15,7 +18,7 @@ def main():
     optpivot = None
 
 
-    # Check if appropriate amount of args
+    # Check if appropriate amount of args, must contains all specified file names as above
     if (len(sys.argv) == 5):
         # Assign
         calBody = sys.argv[1]
@@ -25,16 +28,29 @@ def main():
     else:
         raise("Insufficient Arguments")
     
+    #Generate the output name for the given set of files
     outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
     outputName = outputName.replace("Input","Output")
-    print(outputName)
+
+    
     problems(outputName,calBody,calReadings,empivot,optpivot)
 
 def problems(outputName,calBody,calReadings,empivot,optpivot):
+    """
+        def problems, primary driver that runs the programs associated with each program, returns nothing 
+        @param outputName, the file to be outputtted 
+        @param calBody, data regarding the obejct
+        @param calReadings, data regarding readings from the sensor
+        @param empivot, EM markers data 
+        @param optpitvot, optical markers on the probe data
+    """
+
+    # run the each question acquire the response
     cExepcted = q4.transformation(calBody,calReadings)
     pivCalReadings = q5.getCalibrationReadings(empivot)
     optCalReadings = q6.getCalibrationReadings(optpivot)
 
+    # write each response to the output file
     fileOut = open(outputName,"w")
     fileOut.write('{0} , {1} , {2}\n'.format(len(cExepcted[0].points[0]),len(cExepcted),outputName))
     fileOut.write('{0} ,{1} ,{2}\n'.format(format(pivCalReadings[0],".2f"),format(pivCalReadings[1],".2f"),format(pivCalReadings[2],".2f")))
