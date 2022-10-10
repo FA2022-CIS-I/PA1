@@ -1,6 +1,6 @@
 import numpy as np
 
-def getCalibration(calibrationData):
+def getCalibration(calibrationData, frame):
     """
         gets the calibration positional information from the data 
         @param calibrationData, the set of data in which to predict the location of the position 
@@ -9,7 +9,7 @@ def getCalibration(calibrationData):
     numberOfFrames = len(calibrationData)
     
     #Defining a local probe coordinate system to compute g_j
-    G_first = calibrationData[0][0].points
+    G_first = calibrationData[0][frame].points
 
     g_0 = np.mean(G_first,axis = 1,keepdims=True)
     g_j = G_first - g_0
@@ -19,7 +19,7 @@ def getCalibration(calibrationData):
     p_squares = np.zeros([numberOfFrames*3])
 
     for k in range(numberOfFrames):
-        F = calibrationData[k][0].registration(g_j)
+        F = calibrationData[k][frame].registration(g_j)
         R = F.R
         p = F.p
         for i in range(0,3):

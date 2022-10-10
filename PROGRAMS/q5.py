@@ -10,5 +10,5 @@ def getCalibrationReadings(empivot):
     """
 
     pivotCalibrationData = PointCloud.extractFromFile(empivot)
-    pivCalAns, pivPivAns = pivCal.getCalibration(pivotCalibrationData)
+    pivCalAns, pivPivAns = pivCal.getCalibration(pivotCalibrationData,0)
     return pivPivAns

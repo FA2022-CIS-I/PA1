@@ -48,7 +48,7 @@ def problems(outputName,calBody,calReadings,empivot,optpivot):
     # run the each question acquire the response
     cExepcted = q4.transformation(calBody,calReadings)
     pivCalReadings = q5.getCalibrationReadings(empivot)
-    optCalReadings = q6.getCalibrationReadings(optpivot)
+    optCalReadings = q6.getCalibrationReadings(calBody,optpivot)
 
     # write each response to the output file
     fileOut = open(outputName,"w")
