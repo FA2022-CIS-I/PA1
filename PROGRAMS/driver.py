@@ -58,8 +58,8 @@ def problems(outputName,calBody,calReadings,empivot,optpivot):
         :return: None
     """
     # run the each question acquire the response
-    cExepcted = q4.transformation(calBody,calReadings)
-    pivCalReadings = q5.getCalibrationReadings(empivot)
+    cExepcted = q4.getCExepcted(calBody,calReadings)
+    pivCalReadings = q5.getRelativePosition(empivot)
     optCalReadings = q6.getCalibrationReadings(calBody,optpivot)
 
     # write each response to the output file

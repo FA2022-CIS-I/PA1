@@ -5,7 +5,15 @@ import pointCloud as PointCloud
 
 
 def test_operation(tolerance):
+    """
+        Test if the programs for conducting operations are within tolerance
+        :param tolerance: the degree to which the tolerance is allowed
+        :type param: float
 
+        :return: none
+    """
+
+    # Acquisition of matricies before operation
     rotationMatrix = rotation()
     randomMatrixA = getRandomMatrix(3, 10)
     randomMatrixB = getRandomMatrix(3, 1)
@@ -20,7 +28,7 @@ def test_operation(tolerance):
     print("Matrix b:\n " + str(b))
     print("Matrix F.R \n" + str(F.R)+"\n Matrix F.p\n" + str(F.p))
 
-
+    # Test Rotation Matrix is Within Bounds
     calculated = np.abs(rotationMatrix - F.R)
     toleranceResult = np.all(calculated - F.R) <= tolerance
     if(toleranceResult is False):
@@ -37,7 +45,7 @@ def test_operation(tolerance):
     else:
         print("Rotation matrix determinant is roughly one: " + str(toleranceResult))
 
-
+    # Test if translational vector is within bounds
     calculated = np.abs(rotationMatrix - F.p)
     toleranceResult = np.all(calculated - F.p) <= tolerance
     if(toleranceResult is False):
@@ -47,6 +55,10 @@ def test_operation(tolerance):
 
 
 def rotation():
+    """
+        Acquires a 3x3 rotational matrix 
+        :return: none 
+    """
     omega = np.random.uniform(0, 2*np.pi)
     beta = np.random.uniform(0, 2*np.pi)
     gamma = np.random.uniform(0, 2*np.pi)
