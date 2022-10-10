@@ -4,7 +4,7 @@ import sys
 import q4 as q4
 import q5 as q5
 import q6 as q6
-
+import test as test
 
 def main():
     """
@@ -17,6 +17,12 @@ def main():
     empivot = None
     optpivot = None
 
+
+    if (sys.argv[1] == 'test' and len(sys.argv) == 3):
+        tolerance = float(sys.argv[2])
+        test.test_operation(tolerance)
+        sys.exit()
+        
 
     # Check if appropriate amount of args, must contains all specified file names as above
     if (len(sys.argv) == 5):

@@ -34,9 +34,14 @@ class PointCloud:
         U,S,V = linAlg.svd(H)
         U = U.T
         V_t = V.T
+
+        correction = np.identity(V_t.shape[1])
+        correction[-1,-1] = linAlg.det(V_t.dot(U))
+
+
         
         # acquire R and p for this point cloud
-        R = V_t.dot((U))
+        R = V_t.dot(correction.dot(U))
         p = bMean - R.dot(aMean)
         return Frame.Frame(R,p)
     
