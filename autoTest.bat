@@ -12,11 +12,3 @@ echo TEST LETTERf
 python comparison.py Input\pa1-debug-f-output1.txt Output\pa1-debug-f-output1.txt
 echo TEST LETTERg
 python comparison.py Input\pa1-debug-g-output1.txt Output\pa1-debug-g-output1.txt
-echo TEST LETTERh
-python comparison.py Input\pa1-debug-h-output1.txt Output\pa1-debug-h-output1.txt
-echo TEST LETTERi
-python comparison.py Input\pa1-debug-i-output1.txt Output\pa1-debug-i-output1.txt
-echo TEST LETTERj
-python comparison.py Input\pa1-debug-j-output1.txt Output\pa1-debug-j-output1.txt
-echo TEST LETTERk
-python comparison.py Input\pa1-debug-k-output1.txt Output\pa1-debug-k-output1.txt

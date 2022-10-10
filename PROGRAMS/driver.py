@@ -34,6 +34,9 @@ def main():
         raise("Insufficient Arguments")
     
     # Generate the output name for the given set of files
+
+    # WARNING, BELOW NEEDS TO BE FIXED FOR GENERIC FILE CASE
+
     outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
     outputName = outputName.replace("Input","Output")
 

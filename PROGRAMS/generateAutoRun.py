@@ -6,6 +6,9 @@ def main():
     for i in range(0,7):
         letter = chr(ord('a')+i)
         file.write('python driver.py Input\pa1-debug-{0}-calbody.txt Input\pa1-debug-{0}-calreadings.txt Input\pa1-debug-{0}-empivot.txt Input\pa1-debug-{0}-optpivot.txt\n echo \"COMPLETE\"\n'.format(letter))
+    for i in range(0,4):
+        letter = chr(ord('h')+i)
+        file.write('python driver.py Input\pa1-unknown-{0}-calbody.txt Input\pa1-unknown-{0}-calreadings.txt Input\pa1-unknown-{0}-empivot.txt Input\pa1-unknown-{0}-optpivot.txt\n echo \"COMPLETE\"\n'.format(letter))
 
     file.close()
     file = open("autoTest.bat","w")

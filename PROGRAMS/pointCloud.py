@@ -24,7 +24,7 @@ class PointCloud:
             :param b: the point cloud attempting to register to 
             :type b: PointCloud
 
-            :return: The transformatio n as a Frame, from current Frame to the specified frame b 
+            :return: The transformation as a Frame, from current Frame to the specified frame b 
             :rtype: Frame
         """
 
