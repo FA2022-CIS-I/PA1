@@ -8,19 +8,24 @@ class PointCloud:
         Class to contain the pointCloud, a set of points
     """
 
-    def __init__(self, data=None):
+    def __init__(self, points=None):
         """
-            Initialization of the point cloud
-            @param data is the data in which the point cloud contains
-            @param self is the object in which to receive those data points
+            Initialization of a point cloud
+            :param points: the set of points describing a point cloud
+            :type points: np.array[][]
+
+            :return: none
         """
-        self.points = data
+        self.points = points
 
     def registration(self,b):
         """
-            Registration - Compute the expected values 
-            @param self - first point cloud as reference
-            @param b - second point cloud as reference 
+            Preforms a rigid-body registration relative to another point cloud and returns the transformation 
+            :param b: the point cloud attempting to register to 
+            :type b: PointCloud
+
+            :return: The transformatio n as a Frame, from current Frame to the specified frame b 
+            :rtype: Frame
         """
 
         #per technique, we compute the mean first
@@ -35,30 +40,31 @@ class PointCloud:
         U = U.T
         V_t = V.T
 
-        correction = np.identity(V_t.shape[1])
-        correction[-1,-1] = linAlg.det(V_t.dot(U))
-
-
-        
         # acquire R and p for this point cloud
-        R = V_t.dot(correction.dot(U))
+        R = V_t.dot((U))
         p = bMean - R.dot(aMean)
         return Frame.Frame(R,p)
     
     def transform(self,F):
         """
-            PointCloud multiplication 
-            @param self, object itself, one of two partaking in multiplication 
-            @param F, second object reqiured, two of two partaking in multiplication
+            Preform a transformation applied from another PointCloud
+            :param F: The point cloud to transform with 
+            :type F: Frame 
+
+            :return: the transformed Point Cloud
+            :rtype: PointCloud 
         """
         return PointCloud(F.R.dot(self.points) + F.p)
 
 
 def extractFromFile(fpath):
     """
-        Extracts and creates a point cloud object from the file which contains data points. 
-        @param fpath is the set of data points to read data from 
-        returns a list containing all the frames and their respective point clouds
+       Extract point clouds from a file 
+       :param fpath: The file containing point clouds
+       :type fpath: str
+
+       :return: a list of point clouds 
+       :rtype: [PointCloud]
     """
     # Get Header
     header = pd.read_csv(fpath, header=None, nrows=1)
@@ -86,9 +92,12 @@ def extractFromFile(fpath):
 
 def getIncrementIndex(frameInfo):
     """
-        Helper function for extractFromFile, computes the set of indicies to increment by per data within frame
-        @param frameInfo are the parameters regarding a frame
-        return the set of indicies needed to traverse each frame
+      Helper function to obtain the indexes to increment by per frame 
+        :param frameInfo: information particular to a frame, including the specifications of what is contained in a frame 
+        :type frameInfo: [int]
+
+        :return: a list of numerical indexes to which to itterate over
+        :rtype: [int]
     """
     startPoints = []
     start = 0

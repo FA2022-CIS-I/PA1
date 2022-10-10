@@ -3,7 +3,7 @@ import pointCloud as PointCloud
 def transformation(calbodyFile,calreadingsFile):
     """
         Transformation, acquires the transofrmation necessary to link one point cloud to another 
-        @param calbodyFile 
+        :param calbodyFile: file containing data for obtaining calibration object data 
         @param calreadingsFile
         (see driver.py for description)
         returns the matrix containing the transformation matrix

@@ -2,33 +2,40 @@ import scipy.linalg as linAlg
 
 class Frame:
     """
-        Class for representing a frame
+        Class that represents a coordinate frame
     """
 
     def __init__(self,R,p):
         """
-            Initializing the frame, with rotational and positional matricies
-            @Param R, the rotational matrix R
-            @Param p, the translational matrix p 
-            no return type
+            Initialize rotational and positional elements for a frame
+
+            :param r: Rotation Matrix 
+            :param p: Translational vector
+
+            :type r: numpy.array([][]), NxN
+            :type P: numpy.array([][]), Nx1
         """
         self.R = R
         self.p = p
     
     def inv(self):
         """ 
-            method to acquire a frame with the frame's contents inverse
-            @param self: represents the object itself to which to acquire its inverse
-            return type Frame, which is the object frame's inverted version
+           Inverting a coordinate frame
+           :return: A frame with components inverted
+
+           :rtype: Frame
         """
         R_inv = linAlg.inv(self.R)
         return Frame(R_inv,-1*R_inv.dot(self.p))
 
     def composition(self,F):
         """ 
-            Returns the dot product of two frames 
-            @param self, the object itself
-            @param F, the frame in which to dot itself with  
-            return type Frame, of the product of the two frames 
+          Frame composition with another frame
+
+          :param F: Frame to conduct a composition with 
+          :type f: Frame
+
+          :return: A frame that is comprised of a composition of the two Frames inputed
+          :rtype: Frame
         """
         return Frame(self.R.dot(F.R), self.R.dot(F.p) + self.p) 

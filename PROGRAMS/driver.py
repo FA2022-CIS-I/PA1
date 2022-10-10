@@ -1,5 +1,3 @@
-
-
 import sys
 import q4 as q4
 import q5 as q5
@@ -8,7 +6,8 @@ import test as test
 
 def main():
     """
-        Main, primary driver, returns nothing
+        Main, primary driver and takes input for files to test upon, or testing the general efficacy of the program itself 
+        :return: None
     """
 
     # Placeholders for files
@@ -17,14 +16,14 @@ def main():
     empivot = None
     optpivot = None
 
-
+    # Enable test situation
     if (sys.argv[1] == 'test' and len(sys.argv) == 3):
         tolerance = float(sys.argv[2])
         test.test_operation(tolerance)
         sys.exit()
         
 
-    # Check if appropriate amount of args, must contains all specified file names as above
+    # Enable the running of the program, parsing the inputs required to run the program, or otherwise, prevent user fro further running 
     if (len(sys.argv) == 5):
         # Assign
         calBody = sys.argv[1]
@@ -34,23 +33,30 @@ def main():
     else:
         raise("Insufficient Arguments")
     
-    #Generate the output name for the given set of files
+    # Generate the output name for the given set of files
     outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
     outputName = outputName.replace("Input","Output")
 
-    
+    # Run programs for problems 4,5,6, and output the result to a file
     problems(outputName,calBody,calReadings,empivot,optpivot)
 
 def problems(outputName,calBody,calReadings,empivot,optpivot):
     """
-        def problems, primary driver that runs the programs associated with each program, returns nothing 
-        @param outputName, the file to be outputtted 
-        @param calBody, data regarding the obejct
-        @param calReadings, data regarding readings from the sensor
-        @param empivot, EM markers data 
-        @param optpitvot, optical markers on the probe data
-    """
+         Primary driver that runs the programs associated with each problem, and outputs their results to a file
+        :param outputName: Name of the file containing the results
+        :param calBody: File that contains data regarding oboject calibration 
+        :param calReadings: File that contains readings from the EM markers
+        :param empivot: File that contains readings from EM markers  
+        :param optpivot: File that contains from readings Optical Markers 
 
+        :type outName: str
+        :type calBody: str
+        :type calreadings: str
+        :type empivot: str
+        :type optpivot: str
+
+        :return: None
+    """
     # run the each question acquire the response
     cExepcted = q4.transformation(calBody,calReadings)
     pivCalReadings = q5.getCalibrationReadings(empivot)

@@ -2,9 +2,15 @@ import numpy as np
 
 def getCalibration(calibrationData, frame):
     """
-        gets the calibration positional information from the data 
-        @param calibrationData, the set of data in which to predict the location of the position 
-        returns a set of coordinates representing the position relative to the location of the position
+        Acquires the Calibration Data regarding a set of coordinates 
+        :param calibrationData: the set of data to conduct a calibration against 
+        :param frame: The index of the frame that is held relative to other points
+        :type calibrationData: list[][] comprising of pointClouds
+        :type frame: int, of the corresponding frame
+
+        :return: relative position of a specified point, relative to pivot and relative to marker
+        :rtype: np.array[]
+        
     """
     numberOfFrames = len(calibrationData)
     
