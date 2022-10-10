@@ -7,9 +7,6 @@ def getCalibrationReadings(calBody,optPivot):
     bodyData = PointCloud.extractFromFile(calBody)
     optData = PointCloud.extractFromFile(optPivot)
 
-    print(bodyData[0][0].points)
-    print(optData[0][0].points)
-
     F_D = optData[0][0].registration(bodyData[0][0].points)
 
 
