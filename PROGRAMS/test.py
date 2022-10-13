@@ -31,11 +31,12 @@ def test_operation(tolerance):
     # Test Rotation Matrix is Within Bounds
     calculated = np.abs(rotationMatrix - F.R)
     toleranceResult = np.all(calculated - F.R) <= tolerance
+    print(type(toleranceResult))
     if(toleranceResult is False):
         
         print("Rotation matrix is not within tolerance: " + str((calculated - F.R)))
     else:
-        print("Rotation matrix within tolerance of F.R: " + str(toleranceResult))
+        print("Rotation matrix within tolerance of F.R")
 
     determinantresult = np.abs(linalg.det(F.R) - linalg.det(rotationMatrix))
     toleranceResult = (determinantresult) <= tolerance
@@ -43,15 +44,16 @@ def test_operation(tolerance):
         
         print("Rotation matrix determinant is not roughly one: " + str(determinantresult))
     else:
-        print("Rotation matrix determinant is roughly one: " + str(toleranceResult))
+        print("Rotation matrix determinant is roughly one")
 
     # Test if translational vector is within bounds
-    calculated = np.abs(rotationMatrix - F.p)
+    calculated = np.abs(randomMatrixB - F.p)
     toleranceResult = np.all(calculated - F.p) <= tolerance
     if(toleranceResult is False):
         print("Translational matrix is not within tolerance: " + str(calculated - F.p))
     else:
-        print("Translational matrix is within tolerance: " + str(toleranceResult))
+        print("Translational matrix is within tolerance")
+
 
 
 def rotation():
