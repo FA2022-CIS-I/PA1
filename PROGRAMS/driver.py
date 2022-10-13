@@ -38,7 +38,7 @@ def main():
     # WARNING, BELOW NEEDS TO BE FIXED FOR GENERIC FILE CASE
 
     outputName = sys.argv[1].rsplit("-",1)[0] + '-output1.txt'
-    outputName = outputName.replace("Input","Output")
+    #outputName = outputName.replace("Input","Output")
 
     # Run programs for problems 4,5,6, and output the result to a file
     problems(outputName,calBody,calReadings,empivot,optpivot)

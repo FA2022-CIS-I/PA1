@@ -14,9 +14,13 @@ q4.py: driver for question four, computes the expected values of Contains
 
 q5.py: driver for question five, calibrates the EM marker in a pivot calibration manner relative to the dimple
 
-q6.py driver for question six, performs pivot calibration in EM tracker coordinates for optical tracker pivot
+q6.py: driver for question six, performs pivot calibration in EM tracker coordinates for optical tracker pivot
 
+test.py: contains functions to test point cloud functionality
+ 
 Running parameters: 
 Testing: python driver.py tolerance(as float)
 Normal input: 
 python driver.py xx-calbody.txt xx-calreadings.txt xx-empivot.txt xx-optpivot.txt
+
+NOTE: program will produce output in the same directory as input
