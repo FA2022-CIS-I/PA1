@@ -21,10 +21,10 @@ def getCalibrationReadings(calBody,optPivot):
     optData = PointCloud.extractFromFile(optPivot)
 
     # Acquire registration from optical tracker to em tracker
-    F_D = optData[0][0].registration(bodyData[0][0].points)
 
     #conduct this for each optical data reading
     for i in range(len(optData)):
+        F_D = optData[i][0].registration(bodyData[0][0].points)
         optData[i][1] = optData[i][1].transform(F_D)
 
     # acquire calibration coordinate for optical data
